@@ -9,12 +9,9 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM nginx:stable-alpine
+# Install serve globally
+RUN npm install -g serve
 
-COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 3000
 
-# Expose Nginx port
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "build", "-l", "3000"]

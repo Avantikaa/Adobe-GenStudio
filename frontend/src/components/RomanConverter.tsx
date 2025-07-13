@@ -17,7 +17,7 @@ const RomanConverter: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`${API_URL}/romannumeral?query=${inputValue}`);
+            const response = await fetch(`/api/romannumeral?query=${inputValue}`);
             console.log(response);
             if (!response.ok) {
                 const errorText = await response.text();
