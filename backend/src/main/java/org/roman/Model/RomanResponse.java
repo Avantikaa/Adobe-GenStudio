@@ -1,5 +1,6 @@
 package org.roman.Model;
 
+
 public class RomanResponse {
     private String input;
     private String output;
@@ -10,10 +11,10 @@ public class RomanResponse {
     }
 
     public String getInput() {
-        return input;
+        return this.input;
     }
 
     public String getOutput() {
-        return output;
+        return this.output;
     }
 }

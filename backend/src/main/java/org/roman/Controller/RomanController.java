@@ -6,34 +6,40 @@ import org.roman.Service.RomanService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 
 
 @RestController
+//@RequestMapping("/api/v1")
 public class RomanController {
 
-    private final RomanService romanService;
     private static final Logger logger = LoggerFactory.getLogger(RomanController.class);
-
+    private final RomanService romanService;
 
     public RomanController(RomanService romanService) {
         this.romanService = romanService;
     }
 
-    @GetMapping("/romannumeral")
-    @Timed(value = "roman.convert.time", description = "Time taken to convert integer to Roman numeral")
-    public RomanResponse getRomanNumeral(@RequestParam("query") int query) {
-        logger.info("Received request to convert number: {}", query);
-        if (query < 1 || query > 3999) {
-            throw new RuntimeException("Input must be between 1 and 3999.");
+    @GetMapping(value = "/romannumeral", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRomanNumeral(@RequestParam("query") int query) {
+        logger.info("Received API request to convert: {}", query);
+        try {
+            String roman = romanService.convertToRoman(query);
+            logger.info("Converted {} to {}", query, roman);
+            RomanResponse response =  new RomanResponse(String.valueOf(query), roman);
+            logger.info("Returning Roman numeral response: {}", roman);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException ex) {
+            logger.error("Invalid input: {}", ex.getMessage());
+            return ResponseEntity.badRequest().body("Error: " + ex.getMessage());
+        } catch (Exception ex) {
+            logger.error("Unexpected error while converting number to Roman: ", ex);
+            return ResponseEntity.internalServerError().body("Internal server error");
         }
-
-        String roman = romanService.convertToRoman(query);
-        logger.info("Converted {} to {}", query, roman);
-        return new RomanResponse(String.valueOf(query), roman);
     }
-
 }

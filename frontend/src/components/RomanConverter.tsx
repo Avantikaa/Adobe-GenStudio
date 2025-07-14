@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Text, View, Flex } from "@adobe/react-spectrum";
-import { API_URL } from "../api";
+import { API_PREFIX } from "../api";
 
 const RomanConverter: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>("");
@@ -17,8 +17,7 @@ const RomanConverter: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`/api/romannumeral?query=${inputValue}`);
-            console.log(response);
+            const response = await fetch(`${API_PREFIX}/romannumeral?query=${inputValue}`);
             if (!response.ok) {
                 const errorText = await response.text();
                 setError(`Error: ${errorText}`);
@@ -32,29 +31,36 @@ const RomanConverter: React.FC = () => {
     };
 
     return (
-        <Flex direction="column" gap="size-200" alignItems="start" maxWidth="size-3600">
-            <TextField
-                label="Enter a number (1-3999)"
-                value={inputValue}
-                onChange={setInputValue}
-                type="number"
-                width="size-3000"
-            />
-            <Button variant="cta" onPress={handleConvert}>
-                Convert to Roman Numeral
-            </Button>
+        <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            height="100vh"  // take full viewport height
+        >
+            <Flex direction="column" gap="size-200" alignItems="center" maxWidth="size-3600">
+                <TextField
+                    label="Enter a number (1-3999)"
+                    value={inputValue}
+                    onChange={setInputValue}
+                    type="number"
+                    width="size-3000"
+                />
+                <Button variant="cta" onPress={handleConvert}>
+                    Convert to Roman Numeral
+                </Button>
 
-            {result && (
-                <View backgroundColor="positive" padding="size-200" borderRadius="regular">
-                    <Text>Roman Numeral: <strong>{result}</strong></Text>
-                </View>
-            )}
+                {result && (
+                    <View backgroundColor="positive" padding="size-200" borderRadius="regular">
+                        <Text>Roman Numeral: <strong>{result}</strong></Text>
+                    </View>
+                )}
 
-            {error && (
-                <View backgroundColor="negative" padding="size-200" borderRadius="regular">
-                    <Text>{error}</Text>
-                </View>
-            )}
+                {error && (
+                    <View backgroundColor="negative" padding="size-200" borderRadius="regular">
+                        <Text>{error}</Text>
+                    </View>
+                )}
+            </Flex>
         </Flex>
     );
 };
