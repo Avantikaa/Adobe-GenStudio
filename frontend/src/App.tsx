@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider, defaultTheme, darkTheme } from "@adobe/react-spectrum";
-import RomanConverter from "./components/RomanConverter";
+import RomanConverter from "./components/roman-converter/RomanConverter";
 
 const App: React.FC = () => {
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;

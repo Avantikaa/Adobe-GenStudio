@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button, Text, View, Flex } from "@adobe/react-spectrum";
-import { API_PREFIX } from "../api";
+//import { API_PREFIX } from "../api";
+import { fetchRomanNumeral } from "../../api/roman";
+import RomanConverterForm from "./RomanConverterForm";
 
 const RomanConverter: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>("");
@@ -16,17 +18,17 @@ const RomanConverter: React.FC = () => {
             return;
         }
 
+        if (Number(inputValue)<1 || Number(inputValue)>3999) {
+            setError("Please enter a valid number between 1 and 3999");
+            return;
+        }
+
         try {
-            const response = await fetch(`${API_PREFIX}/romannumeral?query=${inputValue}`);
-            if (!response.ok) {
-                const errorText = await response.text();
-                setError(`Error: ${errorText}`);
-                return;
-            }
-            const data = await response.json();
-            setResult(data.output);
+            const response = await fetchRomanNumeral(inputValue);
+            console.log("Roman Numeral: " +response);
+            setResult(response);
         } catch (err) {
-            setError("Failed to connect to server.");
+            setError("Failed to connect to server");
         }
     };
 
@@ -63,6 +65,26 @@ const RomanConverter: React.FC = () => {
             </Flex>
         </Flex>
     );
+
+    // return (
+    //     <>
+    //         <RomanConverterForm
+    //             inputValue={inputValue}
+    //             setInputValue={setInputValue}
+    //             onConvert={handleConvert}
+    //         />
+    //         {result && (
+    //             <View backgroundColor="positive" padding="size-200" borderRadius="regular">
+    //                 <Text>Roman Numeral: <strong>{result}</strong></Text>
+    //             </View>
+    //         )}
+    //         {error && (
+    //             <View backgroundColor="negative" padding="size-200" borderRadius="regular">
+    //                 <Text>{error}</Text>
+    //             </View>
+    //         )}
+    //     </>
+    // );
 };
 
 export default RomanConverter;

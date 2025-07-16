@@ -1,4 +1,4 @@
-package org.roman.Service;
+package org.roman.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
