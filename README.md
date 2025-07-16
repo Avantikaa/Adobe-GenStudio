@@ -121,9 +121,11 @@ CORS: Configured in backend and NGINX to allow frontend communication.
 
 NGINX: Routes /api/ calls to backend and others to frontend.
 
-Observability: Metrics exposed at /actuator/prometheus, traces sent to Jaeger.
+Observability: 
+Metrics exposed at /actuator/prometheus, traces sent to Jaeger.
+Metrics dashboard can be created on Grafana by adding Prometheus data source.
 
-## 🔗 References
+
 ## 🔗 References
 
 - [Roman numerals on Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
