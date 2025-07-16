@@ -155,6 +155,41 @@ Observability:
 Metrics exposed at /actuator/prometheus, traces sent to Jaeger.
 Metrics dashboard can be created on Grafana by adding Prometheus data source.
 
+## ⚙️ Technology and Dependency Choices
+
+This project uses carefully chosen frameworks and libraries to ensure scalability, maintainability, and a smooth developer experience.
+
+### 🌐 Frontend
+
+- **React**: Chosen for its component-based architecture and wide ecosystem, enabling us to build a modular and highly interactive UI.
+- **TypeScript**: Adds static typing to JavaScript, improving code safety and developer productivity, and catching errors at compile time.
+- **Adobe React Spectrum**: Provides accessible, consistent, and well-designed UI components out of the box, helping deliver a professional-looking frontend quickly.
+
+---
+
+### ☕ Backend
+
+- **Spring Boot**: A popular, production-ready Java framework that simplifies creating RESTful services. It provides built-in support for dependency injection, auto-configuration, and monitoring.
+- **Prometheus (Micrometer metrics)**: Used for collecting metrics from the backend. Spring Boot integrates easily with Micrometer, which exposes metrics in Prometheus format.
+- **Gradle**: Chosen as the build tool for managing dependencies, compiling, and packaging the backend application.
+
+---
+
+### 📊 Observability
+
+- **Prometheus**: Widely adopted, open-source monitoring system that collects and stores metrics data efficiently.
+- **Grafana**: Flexible dashboarding and visualization tool, ideal for creating real-time charts and monitoring panels for backend metrics.
+
+---
+
+### 💡 Reasoning behind these choices
+
+- **Maintainability**: Spring Boot and React both emphasize modular design, making the codebase easier to extend and refactor.
+- **Scalability & production readiness**: Using proven technologies (Spring Boot, Prometheus, Grafana) ensures the stack can handle future growth and is easy to monitor in production.
+- **Community support**: All these tools have large, active communities and long-term support, reducing future risks.
+
+---
+
 
 ## 🔗 References
 
