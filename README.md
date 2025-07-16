@@ -1,4 +1,4 @@
-# ️ Roman Numeral Converter Service
+# ️ Adobe GenStudio - Roman Numeral Converter Service
 
 ## 📜 Overview
 
@@ -37,6 +37,28 @@ Roman numerals are a numeral system originating in ancient Rome. Numbers are rep
 | 1000    | M      |
 
 Learn more: [Wikipedia - Roman Numerals](https://en.wikipedia.org/wiki/Roman_numerals)
+
+---
+## 💡 Approach and Solution
+
+### Problem statement
+
+Convert user-entered numbers to Roman numerals, with a clean UI and proper error handling.
+
+---
+
+### Approach
+
+- Implemented a **React frontend** to provide a simple, interactive form for input and display.
+- Built a **Spring Boot backend** using Java to handle the Roman numeral conversion logic, using a clear and maintainable lookup table strategy.
+- Integrated **Prometheus and Grafana** for observability and real-time metrics visualization.
+
+---
+
+### Why this solution
+
+- The **lookup table approach** for Roman numerals ensures constant-time conversion and clear logic.
+- Splitting responsibilities between **backend (business logic)** and **frontend (UI and user interaction)** improves modularity and maintainability.
 
 ---
 
@@ -81,6 +103,7 @@ project-root/
 
 ---
 
+
 ## 🚀 Installation & Running
 
 ### 1️⃣ Prerequisites
@@ -93,8 +116,15 @@ project-root/
 ### 2️⃣ Clone the repository 
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/Avantikaa/Adobe-GenStudio.git
+````
+- Build the backend
+```bash
+./gradlew build
+```
+- docker build from the root project Adobe-GenStudio
+
+```bash
 docker compose up --build
 ```
 
